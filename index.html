@@ -1,281 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Rate My Dump</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      font-family: 'Courier New', monospace;
-      background-image: url('https://i.imgur.com/RM2Wt9P.jpg'); /* clogged toilet + angry janitor */
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      margin: 0;
-      padding: 0;
-      color: #f5dd99;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rate My Dump - The Ultimate Poop Experience 💩🔥</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+  body {
+    margin: 0;
+    font-family: 'VT323', monospace;
+    background: linear-gradient(135deg, #4b2e00 0%, #1a0d00 100%);
+    color: #f2d17f;
+    overflow-x: hidden;
+  }
+  header {
+    background: #663300;
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffcc00;
+    text-shadow: 2px 2px 5px #000;
+    border-bottom: 4px solid #996600;
+    user-select: none;
+  }
+  .warning-banner {
+    background: #bb3300;
+    color: white;
+    padding: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+    animation: flash 1s infinite alternate;
+  }
+  @keyframes flash {
+    0% { background-color: #bb3300; }
+    100% { background-color: #ff6600; }
+  }
+  main {
+    max-width: 1100px;
+    margin: 2rem auto;
+    background: rgba(0,0,0,0.9);
+    border-radius: 12px;
+    box-shadow: 0 0 30px #552200;
+    padding: 2rem 3rem 3rem 3rem;
+  }
+  section {
+    margin-bottom: 3rem;
+    border-bottom: 2px solid #774400;
+    padding-bottom: 2rem;
+  }
+  section:last-child {
+    border-bottom: none;
+  }
+  h2 {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 3px #000;
+    margin-bottom: 1rem;
+    color: #ffbb33;
+  }
+  h3 {
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    color: #ffcc55;
+  }
+  button {
+    cursor: pointer;
+    background: #aa7700;
+    color: black;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1.2rem;
+    margin-top: 1rem;
+    box-shadow: 0 3px 0 #775500;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #cc9900;
+  }
+  input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+  textarea, input[type="text"], input[type="file"], select, input[type="number"] {
+    width: 100%;
+    max-width: 600px;
+    background: #22180f;
+    color: #f2d17f;
+    font-family: 'VT323', monospace;
+    border: 2px solid #886600;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+  label {
+    font-weight: bold;
+    margin-top: 1rem;
+    display: block;
+  }
+  .container {
+    margin-top: 1rem;
+  }
+  img {
+    max-width: 100%;
+    border: 4px dashed #bb7700;
+    border-radius: 12px;
+    margin-top: 0.5rem;
+    filter: drop-shadow(1px 1px 2px black);
+  }
+  .story, .comment {
+    background: #332200cc;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px #bb6600;
+  }
+  .story .comments-section {
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+  }
+  .comment-input {
+    margin-top: 0.5rem;
+    width: 90%;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    border: 1px solid #aa6600;
+    padding: 0.25rem 0.5rem;
+  }
+  .comment-btn {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+  }
+  .vote-output {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    color: #ffee77;
+    font-weight: bold;
+    min-height: 2rem;
+    text-shadow: 1px 1px 2px #330;
+  }
+  .leaderboard ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    font-size: 1.1rem;
+  }
+  .helpline {
+    background: #220000;
+    border: 2px solid #ff6600;
+    color: #ffcc66;
+    font-size: 1.3rem;
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+    user-select: none;
+  }
+
+  /* Poop Calculator Styles */
+  #poopCalc label {
+    margin-top: 1rem;
+  }
+  #poopCalc input, #poopCalc select {
+    max-width: 300px;
+  }
+  #calcResult {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffbb44;
+    text-shadow: 1px 1px 3px #551100;
+  }
+
+  /* Snake game styles */
+  #snakeGameContainer {
+    max-width: 650px;
+    margin: 2rem auto 0 auto;
+    background: #331f00;
+    border: 3px solid #bb7700;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #cc9900;
+    user-select: none;
+  }
+  #snakeGameContainer h2 {
+    text-align: center;
+    color: #ffbb33;
+    margin-top: 1rem;
+  }
+  canvas {
+    display: block;
+    margin: 1rem auto 2rem auto;
+    background: #110a00;
+    border: 3px solid #bb6600;
+    border-radius: 10px;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    main {
+      padding: 1rem 1.5rem 2rem 1.5rem;
+      max-width: 95%;
     }
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      background: rgba(0, 0, 0, 0.85);
-      padding: 2rem;
-      border: 2px solid #865d1c;
-      box-shadow: 0 0 15px #000;
-      border-radius: 12px;
+    button, textarea, input[type="text"], input[type="file"], select, input[type="number"] {
+      max-width: 100%;
     }
-    h1 {
-      font-size: 3rem;
-      color: #ffd700;
-      text-shadow: 2px 2px 2px #000;
-      text-align: center;
+    #snakeGameContainer {
+      max-width: 100%;
     }
-    h2 {
-      color: #f2cd88;
-      margin-top: 2rem;
-    }
-    .warning-banner {
-      background: #ff0000;
-      color: white;
-      padding: 0.3rem;
-      font-weight: bold;
-      text-align: center;
-      animation: flash 0.5s infinite alternate;
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-    @keyframes flash {
-      0% { background-color: #ff0000; }
-      100% { background-color: #ff9900; }
-    }
-    img {
-      width: 100%;
-      border: 3px dashed #ffcc00;
-      margin-bottom: 1rem;
-      display: block;
-      max-height: 300px;
-      object-fit: contain;
-    }
-    button {
-      background: #b88900;
-      color: black;
-      padding: 0.5rem 1rem;
-      margin: 0.5rem 0.25rem 0.5rem 0;
-      border: none;
-      cursor: pointer;
-      font-size: 1.1rem;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background: #d9af00;
-    }
-    input[type="text"], input[type="number"], textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin: 0.25rem 0 0.75rem 0;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
-      font-family: 'Courier New', monospace;
-      box-sizing: border-box;
-    }
-    textarea {
-      resize: vertical;
-      min-height: 60px;
-    }
-    .leaderboard, .vote-output, .popup, .stories-section, .calculator, .helpline {
-      background: #2d1f0f;
-      padding: 1rem;
-      margin-top: 1rem;
-      border-radius: 8px;
-      color: #f2cd88;
-      box-sizing: border-box;
-    }
-    .popup {
-      border: 2px dashed #ffdd33;
-      text-align: center;
-      font-size: 1.1rem;
-    }
-    .helpline {
-      margin-top: 2rem;
-      font-size: 1.2rem;
-      background: #111;
-      border: 2px solid red;
-      padding: 1rem;
-      color: #f77;
-      text-align: center;
-    }
-    .story {
-      border: 1px solid #a57c00;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      background: #3c2f10;
-    }
-    .story img {
-      margin-top: 0.5rem;
-      max-height: 180px;
-    }
-    .comment-section {
-      margin-top: 0.75rem;
-      padding-left: 1rem;
-      font-size: 0.9rem;
-      border-left: 2px solid #a57c00;
-    }
-    .comment-input {
-      margin-top: 0.5rem;
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .comment-input input {
-      flex-grow: 1;
-      font-size: 1rem;
-    }
-    .comment-btn {
-      background: #a57c00;
-      color: black;
-      padding: 0.3rem 0.7rem;
-      border-radius: 5px;
-      cursor: pointer;
-      border: none;
-    }
-    #snakeCanvas {
-      background: #110a00;
-      display: block;
-      margin: 1rem auto;
-      border: 3px solid #b88900;
-      border-radius: 10px;
-      touch-action: none;
-    }
-    #snakeControls {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    #snakeScore {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      color: #f2cd88;
-      font-weight: bold;
-    }
-    /* Responsive tweaks */
-    @media (max-width: 700px) {
-      .container {
-        margin: 1rem;
-        padding: 1rem;
-      }
-      img {
-        max-height: 200px;
-      }
-      #snakeCanvas {
-        width: 280px;
-        height: 280px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="warning-banner">🔥 Wanna Check out Hot New Dumps In Your Area? Call that Local Med Doc Steaming Sammy 🔥</div>
-
-  <div class="container">
-    <h1>Rate My Dump</h1>
-
-    <p><input type="checkbox" id="terms" /> I agree to not upload pictures of my dinkie doos</p>
-    <button onclick="enterSite()">Let Me In</button>
-
-    <div id="mainContent" style="display:none;">
-
-      <!-- Random Dump of the Day -->
-      <h2>🍩 Random Dump of the Day</h2>
-      <img src="https://i.imgur.com/z2Rbzft.jpg" alt="Daily Dump" />
-      <p><i>"My girlfriend had to pull this one out with salad tongs. It had joints."</i></p>
-
-      <div>
-        <button onclick="rate('up')">👍 Vote Up</button>
-        <button onclick="rate('down')">👎 Vote Down</button>
-        <p class="vote-output" id="voteMsg"></p>
-      </div>
-
-      <div class="leaderboard">
-        <h3>🧻 Top Rated Dumps:</h3>
-        <ul>
-          <li>"I let one go and it pierced my knickers"</li>
-          <li>"Something died that made me gape"</li>
-          <li>"Had to cut it and remove with a cup."</li>
-          <li>"I have birthed something that should have been aborted."</li>
-        </ul>
-      </div>
-
-      <div class="helpline">
-        🚨 Need Help? Call the 24/7 Poop Sling Hotline: <strong>1-800-POO-SAVE</strong><br/>
-        Rent-a-Rig. Emergency Bowl Support. Emotional Cleanups.
-      </div>
-
-      <div class="popup" id="spamPopup" style="display:none;">
-        💩 Wanna meet Single Dads? DilfTurds.net
-      </div>
-
-      <!-- Poop Calculator -->
-      <div class="calculator">
-        <h2>💩 Poop Size Calculator</h2>
-        <p>Calculate the size of your dump and see what toilet bowl you need!</p>
-
-        <label for="length">Length (inches):</label>
-        <input type="number" id="length" min="1" max="30" value="5" />
-
-        <label for="width">Width (inches):</label>
-        <input type="number" id="width" min="1" max="15" value="3" />
-
-        <label for="height">Height (inches):</label>
-        <input type="number" id="height" min="1" max="15" value="2" />
-
-        <label for="bowlShape">Toilet Bowl Shape:</label>
-        <select id="bowlShape">
-          <option value="round">Round (12 inch diameter)</option>
-          <option value="elongated">Elongated (18 inch diameter)</option>
-          <option value="giant">Giant (24 inch diameter)</option>
-        </select>
-
-        <button onclick="calculatePoop()">Calculate Bowl Fit</button>
-        <p id="calcResult"></p>
-      </div>
-
-      <!-- Submit Poop Story -->
-      <div class="stories-section">
-        <h2>💩 Submit Your Funny Dump Story</h2>
-        <form id="storyForm">
-          <label for="storyText">Story:</label>
-          <textarea id="storyText" placeholder="Tell us about your epic dump..." required></textarea>
-
-          <label for="storyImage">Upload an Image (optional):</label>
-          <input type="file" id="storyImage" accept="image/*" />
-
-          <button type="submit">Submit Story</button>
-        </form>
-      </div>
-
-      <!-- Stories List -->
-      <div class="stories-section" id="storiesList">
-        <h2>📜 User Dump Stories</h2>
-        <!-- User stories will appear here -->
-      </div>
-
-      <!-- Snake Game -->
-      <div>
-        <h2>🐍 Play Poop Snake Game</h2>
-        <div id="snakeControls">
-          <button onclick="startGame()">Start Game</button>
-          <p id="snakeScore">Score: 0</p>
-          <small>Use arrow keys or swipe to control.</small>
-        </div>
-        <canvas id="snakeCanvas" width="320" height="320" tabindex="0"></canvas>
-      </div>
+<header>💩 Rate My Dump: The Ultimate Poop Experience 💩</header>
+<div class="warning-banner">🔥 Wanna Check out Hot New Dumps In Your Area? Call Local Med Doc Steaming Sammy 🔥</div>
+<main>
+  <!-- Dump of the day + voting -->
+  <section id="dumpOfDaySection">
+    <h2>🍩 Random Dump of the Day</h2>
+    <img id="dumpImage" src="https://i.imgur.com/z2Rbzft.jpg" alt="Daily Dump" />
+    <p id="dumpQuote"><i>"My girlfriend had to pull this one out with salad tongs. It had joints."</i></p>
+    <button onclick="rate('up')">👍 Vote Up</button>
+    <button onclick="rate('down')">👎 Vote Down</button>
+    <p class="vote-output" id="voteMsg"></p>
+    <div class="leaderboard">
+      <h3>🧻 Top Rated Dumps:</h3>
+      <ul>
+        <li>"I let one go and it pierced my knickers"</li>
+        <li>"Something died that made me gape"</li>
+        <li>"Had to cut it and remove with a cup."</li>
+        <li>"I have birthed something that should have been aborted."</li>
+      </ul>
     </div>
-  </div>
+  </section>
+
+  <!-- Poop Calculator -->
+  <section id="poopCalc">
+    <h2>🚽 Poop Calculator - What Toilet Bowl Size Do You Need?</h2>
+    <label for="length">Length of Your Dump (inches):</label>
+    <input type="number" id="length" min="1" max="48" placeholder="e.g. 12" />
+    <label for="width">Width of Your Dump (inches):</label>
+    <input type="number" id="width" min="1" max="24" placeholder="e.g. 5" />
+    <label for="height">Height of Your Dump (inches):</label>
+    <input type="number" id="height" min="1" max="24" placeholder="e.g. 4" />
+    <label for="bowlShape">Select Toilet Bowl Shape:</label>
+    <select id="bowlShape">
+      <option value="round">Round</option>
+      <option value="elongated">Elongated</option>
+      <option value="oval">Oval</option>
+    </select>
+    <button onclick="calculateBowl()">Calculate Bowl Size</button>
+    <p id="calcResult"></p>
+  </section>
+
+  <!-- Submit your own poop story -->
+  <section id="storySection">
+    <h2>💩 Share Your Own Dump Story</h2>
+    <p><input type="checkbox" id="terms" /> I agree to not upload pictures of my dinkie doos</p>
+    <textarea id="storyInput" placeholder="Type your hilarious poop story here..." rows="5"></textarea>
+    <label for="imageInput">Optional: Upload an image of your dump (client-side only)</label>
+    <input type="file" id="imageInput" accept="image/*" />
+    <button onclick="submitStory()">Submit Story</button>
+
+    <div id="storiesContainer" class="leaderboard">
+      <h3>💩 User Submitted Stories</h3>
+      <div id="storiesList"></div>
+    </div>
+  </section>
+
+  <!-- Helpline -->
+  <section class="helpline">
+    🚨 Need Help? Call the 24/7 Poop Sling Hotline: <strong>1-800-POO-SAVE</strong><br />
+    Rent-a-Rig. Emergency Bowl Support. Emotional Cleanups.
+  </section>
+
+  <!-- Snake Game -->
+  <section id="snakeGameContainer">
+    <h2>🐍 Play the Poop Snake Game!</h2>
+    <canvas id="snakeCanvas" width="320" height="320"></canvas>
+    <p style="text-align:center; color:#ffbb33; font-style: italic;">
+      Use arrow keys or swipe on mobile to control the snake. Eat the poop to grow!
+    </p>
+    <p id="snakeScore" style="text-align:center; font-size:1.5rem; color:#ffcc55;">Score: 0</p>
+    <button onclick="startGame()">Start New Game</button>
+  </section>
+</main>
 
 <script>
-  // Voting messages
+  // Dump of the Day voting messages
   const voteUps = [
     "Looked like a lava lamp exploded.",
     "Split the toilet seat. We had to move.",
@@ -290,22 +303,6 @@
     "I threw the whole toilet out.",
     "Couldn't flush. Had to baptize it instead."
   ];
-
-  // Global stories array
-  let stories = [];
-  let storyIdCounter = 0;
-
-  // Enter site function
-  function enterSite() {
-    if (!document.getElementById('terms').checked) {
-      alert("Please agree not to upload dinkie doos.");
-      return;
-    }
-    document.getElementById('mainContent').style.display = 'block';
-    setInterval(showPopup, 10000);
-  }
-
-  // Voting function
   function rate(dir) {
     const msg = dir === 'up'
       ? voteUps[Math.floor(Math.random() * voteUps.length)]
@@ -313,91 +310,118 @@
     document.getElementById('voteMsg').innerText = msg;
   }
 
-  // Popup function
-  function showPopup() {
-    const popup = document.getElementById('spamPopup');
-    popup.style.display = 'block';
-    setTimeout(() => { popup.style.display = 'none'; }, 6000);
-  }
-
-  // Poop calculator logic
-  function calculatePoop() {
+  // Poop Calculator logic
+  function calculateBowl() {
     const length = parseFloat(document.getElementById('length').value);
     const width = parseFloat(document.getElementById('width').value);
     const height = parseFloat(document.getElementById('height').value);
-    const bowlShape = document.getElementById('bowlShape').value;
+    const shape = document.getElementById('bowlShape').value;
 
-    if (isNaN(length) || isNaN(width) || isNaN(height)) {
-      alert("Please enter valid numbers for all dimensions.");
+    if (!length || !width || !height) {
+      alert("Please enter all dimensions!");
+      return;
+    }
+    if (length <= 0 || width <= 0 || height <= 0) {
+      alert("All dimensions must be positive numbers!");
       return;
     }
 
-    // Approximate bowl diameter based on shape
-    let bowlDiameter = 12; // round default
-    if (bowlShape === 'elongated') bowlDiameter = 18;
-    else if (bowlShape === 'giant') bowlDiameter = 24;
+    // Rough toilet bowl volumes in cubic inches (approximations)
+    // We'll compare your dump volume to these typical toilet bowl volumes:
+    // Round: ~1000 cubic inches, Elongated: ~1200, Oval: ~1100
 
-    // Simplified: compare length and width with bowl size
-    const fitsLength = length <= bowlDiameter;
-    const fitsWidth = width <= bowlDiameter;
+    const dumpVolume = length * width * height;
 
-    let result = '';
-    if (fitsLength && fitsWidth) {
-      result = "Good news! Your dump fits perfectly in this toilet bowl.";
-    } else {
-      result = "Uh-oh, your dump might be too big for this toilet bowl! Consider a bigger one.";
+    let bowlVolume, bowlName;
+    switch (shape) {
+      case 'round':
+        bowlVolume = 1000;
+        bowlName = "Round Bowl (~1000 cu in)";
+        break;
+      case 'elongated':
+        bowlVolume = 1200;
+        bowlName = "Elongated Bowl (~1200 cu in)";
+        break;
+      case 'oval':
+        bowlVolume = 1100;
+        bowlName = "Oval Bowl (~1100 cu in)";
+        break;
+      default:
+        bowlVolume = 1000;
+        bowlName = "Round Bowl (~1000 cu in)";
     }
 
-    document.getElementById('calcResult').innerText = result;
+    let message = `Your dump volume is approximately <strong>${dumpVolume.toFixed(0)}</strong> cubic inches.<br/>`;
+
+    if (dumpVolume > bowlVolume) {
+      message += `🔥 Warning! Your dump exceeds the capacity of a ${bowlName}. You might want to call Steaming Sammy for emergency unclogging! 🚽🔥`;
+    } else {
+      message += `✅ Good news! Your dump fits in a ${bowlName}. Flush with confidence! 🚽✅`;
+    }
+
+    document.getElementById('calcResult').innerHTML = message;
   }
 
-  // Story submission and display logic
-  const storyForm = document.getElementById('storyForm');
-  const storiesList = document.getElementById('storiesList');
+  // Story submission and comments
+  let stories = [];
 
-  storyForm.addEventListener('submit', event => {
-    event.preventDefault();
+  function submitStory() {
+    if (!document.getElementById('terms').checked) {
+      alert("Please agree not to upload dinkie doos.");
+      return;
+    }
+    const storyInput = document.getElementById('storyInput');
+    const imageInput = document.getElementById('imageInput');
+    const text = storyInput.value.trim();
 
-    const text = document.getElementById('storyText').value.trim();
-    const fileInput = document.getElementById('storyImage');
-    const file = fileInput.files[0];
-
-    if (!text) {
-      alert("Please enter a story.");
+    if (text.length < 10) {
+      alert("Your poop story must be at least 10 characters long!");
       return;
     }
 
-    if (file && !file.type.startsWith('image/')) {
-      alert("Only image files are allowed for upload.");
-      return;
-    }
-
-    if (file) {
+    if (imageInput.files.length > 0) {
+      const file = imageInput.files[0];
       const reader = new FileReader();
       reader.onload = function(e) {
         addStory(text, e.target.result);
-        storyForm.reset();
       };
       reader.readAsDataURL(file);
     } else {
       addStory(text, null);
-      storyForm.reset();
     }
-  });
+  }
 
-  function addStory(text, imageData) {
-    const story = {
-      id: storyIdCounter++,
+  function addStory(text, imageDataUrl) {
+    const newStory = {
+      id: Date.now(),
       text,
-      imageData,
+      image: imageDataUrl,
       comments: []
     };
-    stories.unshift(story); // newest on top
+    stories.unshift(newStory);
+    document.getElementById('storyInput').value = '';
+    document.getElementById('imageInput').value = '';
+    renderStories();
+  }
+
+  function addComment(storyId) {
+    const inputId = 'commentInput-' + storyId;
+    const commentInput = document.getElementById(inputId);
+    const commentText = commentInput.value.trim();
+    if (commentText.length < 3) {
+      alert("Comment too short!");
+      return;
+    }
+    const story = stories.find(s => s.id === storyId);
+    if (!story) return;
+    story.comments.push(commentText);
+    commentInput.value = '';
     renderStories();
   }
 
   function renderStories() {
-    storiesList.innerHTML = '<h2>📜 User Dump Stories</h2>';
+    const container = document.getElementById('storiesList');
+    container.innerHTML = '';
     stories.forEach(story => {
       const storyDiv = document.createElement('div');
       storyDiv.classList.add('story');
@@ -406,47 +430,42 @@
       storyText.textContent = story.text;
       storyDiv.appendChild(storyText);
 
-      if (story.imageData) {
+      if (story.image) {
         const img = document.createElement('img');
-        img.src = story.imageData;
-        img.alt = "User submitted dump pic";
+        img.src = story.image;
+        img.alt = 'User uploaded dump image';
         storyDiv.appendChild(img);
       }
 
-      // Comments
+      // Comments section
       const commentsSection = document.createElement('div');
-      commentsSection.classList.add('comment-section');
+      commentsSection.classList.add('comments-section');
 
       story.comments.forEach(comment => {
-        const commentP = document.createElement('p');
-        commentP.textContent = comment;
-        commentsSection.appendChild(commentP);
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.textContent = comment;
+        commentsSection.appendChild(commentDiv);
       });
 
-      // Add comment input and button
+      // Comment input & button
       const commentInput = document.createElement('input');
       commentInput.type = 'text';
-      commentInput.placeholder = 'Add a comment...';
+      commentInput.placeholder = 'Write a comment...';
+      commentInput.id = 'commentInput-' + story.id;
       commentInput.classList.add('comment-input');
 
       const commentBtn = document.createElement('button');
       commentBtn.textContent = 'Comment';
       commentBtn.classList.add('comment-btn');
-      commentBtn.onclick = () => {
-        const commentText = commentInput.value.trim();
-        if (commentText) {
-          story.comments.push(commentText);
-          commentInput.value = '';
-          renderStories();
-        }
-      };
+      commentBtn.onclick = () => addComment(story.id);
 
       commentsSection.appendChild(commentInput);
       commentsSection.appendChild(commentBtn);
 
       storyDiv.appendChild(commentsSection);
 
-      storiesList.appendChild(storyDiv);
+      container.appendChild(storyDiv);
     });
   }
 
@@ -515,4 +534,105 @@
     ctx.strokeStyle = '#a05200';
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.moveTo(centerX - 6, center
+    ctx.moveTo(centerX - 6, centerY);
+    ctx.bezierCurveTo(centerX, centerY - 8, centerX + 6, centerY + 8, centerX - 6, centerY);
+    ctx.stroke();
+  }
+
+  function gameOver() {
+    gameRunning = false;
+    clearInterval(gameInterval);
+    alert(`Game over! Your score: ${score}`);
+  }
+
+  function updateScore() {
+    document.getElementById('snakeScore').textContent = `Score: ${score}`;
+  }
+
+  function moveSnake() {
+    if (!gameRunning) return;
+
+    const head = {...snake[0]};
+
+    switch (direction) {
+      case 'left': head.x--; break;
+      case 'right': head.x++; break;
+      case 'up': head.y--; break;
+      case 'down': head.y++; break;
+    }
+
+    // Wall collision
+    if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+      gameOver();
+      return;
+    }
+
+    // Self collision
+    if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+      gameOver();
+      return;
+    }
+
+    snake.unshift(head);
+
+    // Check if ate food
+    if (head.x === food.x && head.y === food.y) {
+      score++;
+      updateScore();
+      placeFood();
+    } else {
+      snake.pop();
+    }
+
+    drawGame();
+  }
+
+  function gameLoop() {
+    moveSnake();
+  }
+
+  // Controls
+  document.addEventListener('keydown', e => {
+    if (!gameRunning) return;
+    switch (e.key) {
+      case 'ArrowUp': if (direction !== 'down') direction = 'up'; break;
+      case 'ArrowDown': if (direction !== 'up') direction = 'down'; break;
+      case 'ArrowLeft': if (direction !== 'right') direction = 'left'; break;
+      case 'ArrowRight': if (direction !== 'left') direction = 'right'; break;
+    }
+  });
+
+  // Mobile swipe controls
+  let touchStartX = null;
+  let touchStartY = null;
+  document.addEventListener('touchstart', e => {
+    if (!gameRunning) return;
+    const touch = e.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  });
+  document.addEventListener('touchend', e => {
+    if (!gameRunning) return;
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx > 30 && direction !== 'left') direction = 'right';
+      else if (dx < -30 && direction !== 'right') direction = 'left';
+    } else {
+      if (dy > 30 && direction !== 'up') direction = 'down';
+      else if (dy < -30 && direction !== 'down') direction = 'up';
+    }
+  });
+
+  function startGame() {
+    if(gameRunning) clearInterval(gameInterval);
+    initSnake();
+    placeFood();
+    drawGame();
+    gameRunning = true;
+    gameInterval = setInterval(gameLoop, 150);
+  }
+</script>
+</body>
+</html>
