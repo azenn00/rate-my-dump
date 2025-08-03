@@ -7,13 +7,13 @@
   <style>
     body {
       font-family: 'Courier New', monospace;
-      background: linear-gradient(#3e2f1c, #22180f);
-      color: #f5dd99;
-      background-image: url('https://i.imgur.com/ZM1Un1L.jpg'); /* dirty wall or grungy bg */
+      background-image: url('https://i.imgur.com/D0fDTRW.jpg'); /* clogged toilet + angry janitor */
       background-size: cover;
+      background-position: center;
       background-attachment: fixed;
       margin: 0;
       padding: 0;
+      color: #f5dd99;
     }
     .container {
       max-width: 650px;
@@ -45,12 +45,13 @@
       width: 100%;
       border: 3px dashed #ffcc00;
       margin-bottom: 1rem;
+      border-radius: 8px;
     }
     button {
       background: #b88900;
       color: black;
       padding: 0.5rem 1rem;
-      margin: 0.5rem;
+      margin: 0.5rem 0;
       border: none;
       cursor: pointer;
       font-size: 1.1rem;
@@ -72,90 +73,3 @@
       margin-top: 2rem;
       font-size: 1.2rem;
       background: #111;
-      border: 2px solid red;
-      padding: 1rem;
-      color: #f77;
-    }
-  </style>
-</head>
-<body>
-  <div class="warning-banner">🔥 Wanna Check out Hot New Dumps In Your Area? Call that Local Med Doc Steaming Sammy 🔥</div>
-
-  <div class="container">
-    <h1>Rate My Dump</h1>
-
-    <p><input type="checkbox" id="terms" /> I agree to not upload pictures of my dinkie doos</p>
-    <button onclick="enterSite()">Let Me In</button>
-
-    <div id="mainContent" style="display:none;">
-      <h2>🍩 Random Dump of the Day</h2>
-      <img src="https://i.imgur.com/z2Rbzft.jpg" alt="Daily Dump" />
-      <p><i>"My girlfriend had to pull this one out with salad tongs. It had joints."</i></p>
-
-      <div>
-        <button onclick="rate('up')">👍 Vote Up</button>
-        <button onclick="rate('down')">👎 Vote Down</button>
-        <p class="vote-output" id="voteMsg"></p>
-      </div>
-
-      <div class="leaderboard">
-        <h3>🧻 Top Rated Dumps:</h3>
-        <ul>
-          <li>"I let one go and it pierced my knickers"</li>
-          <li>"Something died that made me gape"</li>
-          <li>"Had to cut it and remove with a cup. "</li>
-          <li>"I have birthed something that should have been aborted."</li>
-        </ul>
-      </div>
-
-      <div class="helpline">
-        🚨 Need Help? Call the 24/7 Poop Sling Hotline: <strong>1-800-POO-SAVE</strong><br/>
-        Rent-a-Rig. Emergency Bowl Support. Emotional Cleanups.
-      </div>
-
-      <div class="popup" id="spamPopup" style="display:none;">
-        💩 Wanna meet Single Dads? DilfTurds.net
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const voteUps = [
-      "Looked like a lava lamp exploded.",
-      "Split the toilet seat. We had to move.",
-      "A steaming spiral of shame and pride.",
-      "It growled at me. We made eye contact.",
-      "Used a whole roll. Still wasn't clean."
-    ];
-    const voteDowns = [
-      "Limp and lifeless. Like a deflated balloon.",
-      "Wet fart energy. Too soft to rate.",
-      "Looked like pudding. Felt like sin.",
-      "I threw the whole toilet out.",
-      "Couldn't flush. Had to baptize it instead."
-    ];
-
-    function enterSite() {
-      if (!document.getElementById('terms').checked) {
-        alert("Please agree not to upload dinkie doos.");
-        return;
-      }
-      document.getElementById('mainContent').style.display = 'block';
-      setInterval(showPopup, 10000); // every 10 seconds
-    }
-
-    function rate(dir) {
-      const msg = dir === 'up'
-        ? voteUps[Math.floor(Math.random() * voteUps.length)]
-        : voteDowns[Math.floor(Math.random() * voteDowns.length)];
-      document.getElementById('voteMsg').innerText = msg;
-    }
-
-    function showPopup() {
-      const popup = document.getElementById('spamPopup');
-      popup.style.display = 'block';
-      setTimeout(() => { popup.style.display = 'none'; }, 6000);
-    }
-  </script>
-</body>
-</html>
