@@ -157,7 +157,7 @@
         💩 Wanna meet Single Dads? DilfTurds.net
       </div>
 
-      <!-- NEW: Submit your own poop story -->
+      <!-- Submit your own poop story -->
       <h2>💩 Share Your Own Dump Story</h2>
       <textarea id="storyInput" placeholder="Type your hilarious poop story here..." rows="4"></textarea>
       <label for="imageInput">Optional: Upload an image of your dump (client-side only)</label>
@@ -211,7 +211,6 @@
       setTimeout(() => { popup.style.display = 'none'; }, 6000);
     }
 
-    // Submit a new poop story with optional image
     function submitStory() {
       const storyInput = document.getElementById('storyInput');
       const imageInput = document.getElementById('imageInput');
@@ -247,7 +246,6 @@
       renderStories();
     }
 
-    // Add comment to story by id
     function addComment(storyId) {
       const inputId = 'commentInput-' + storyId;
       const commentInput = document.getElementById(inputId);
@@ -257,12 +255,12 @@
         return;
       }
       const story = stories.find(s => s.id === storyId);
+      if (!story) return;
       story.comments.push(commentText);
       commentInput.value = '';
       renderStories();
     }
 
-    // Render all stories and their comments
     function renderStories() {
       const container = document.getElementById('storiesList');
       container.innerHTML = '';
@@ -282,20 +280,18 @@
           storyDiv.appendChild(img);
         }
 
-        // Comments container
+        // Comments section
         const commentsSection = document.createElement('div');
         commentsSection.classList.add('comments-section');
 
-        if (story.comments.length > 0) {
-          story.comments.forEach(comment => {
-            const commentDiv = document.createElement('div');
-            commentDiv.classList.add('comment');
-            commentDiv.textContent = comment;
-            commentsSection.appendChild(commentDiv);
-          });
-        }
+        story.comments.forEach(comment => {
+          const commentDiv = document.createElement('div');
+          commentDiv.classList.add('comment');
+          commentDiv.textContent = comment;
+          commentsSection.appendChild(commentDiv);
+        });
 
-        // Comment input box + button
+        // Comment input & button
         const commentInput = document.createElement('input');
         commentInput.type = 'text';
         commentInput.placeholder = 'Write a comment...';
