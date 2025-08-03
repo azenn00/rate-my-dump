@@ -2,136 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rate My Dump</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(#3e2f1c, #22180f);
+      color: #f5dd99;
+      background-image: url('https://i.imgur.com/ZM1Un1L.jpg'); /* dirty wall or grungy bg */
+      background-size: cover;
+      background-attachment: fixed;
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: radial-gradient(circle, #f1c40f 0%, #f39c12 100%);
-      color: #2c3e50;
-      text-align: center;
-      padding: 2rem;
-      background-image: url('https://em-content.zobj.net/thumbs/160/apple/354/pile-of-poo_1f4a9.png');
-      background-size: 100px;
-      background-repeat: repeat;
+      padding: 0;
     }
     .container {
-      background: rgba(255,255,255,0.95);
-      border-radius: 12px;
-      max-width: 500px;
-      margin: auto;
+      max-width: 650px;
+      margin: 2rem auto;
+      background: rgba(0, 0, 0, 0.85);
       padding: 2rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      border: 2px solid #865d1c;
+      box-shadow: 0 0 15px #000;
+      border-radius: 12px;
     }
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      font-size: 3rem;
+      color: #ffd700;
+      text-shadow: 2px 2px 2px #000;
+    }
+    .warning-banner {
+      background: #ff0000;
+      color: white;
+      padding: 0.3rem;
+      font-weight: bold;
+      text-align: center;
+      animation: flash 0.5s infinite alternate;
+    }
+    @keyframes flash {
+      0% { background-color: #ff0000; }
+      100% { background-color: #ff9900; }
     }
     img {
-      max-width: 100%;
-      height: 200px;
-    }
-    button {
-      background: #27ae60;
-      border: none;
-      color: white;
-      padding: 0.7rem 1.2rem;
-      margin: 0.5rem;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #1e8449;
-    }
-    .rating {
-      margin-top: 1rem;
-    }
-    .leaderboard {
-      text-align: left;
-      margin-top: 2rem;
-    }
-    .leaderboard li {
-      margin: 0.5rem 0;
-    }
-    #termsBox {
+      width: 100%;
+      border: 3px dashed #ffcc00;
       margin-bottom: 1rem;
     }
-    .random-comment {
-      margin-top: 1.5rem;
-      font-style: italic;
-      color: #7f8c8d;
-      background: #ecf0f1;
-      padding: 0.7rem;
+    button {
+      background: #b88900;
+      color: black;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      border-radius: 5px;
+    }
+    .leaderboard, .vote-output, .popup {
+      background: #2d1f0f;
+      padding: 1rem;
+      margin-top: 1rem;
       border-radius: 8px;
+      color: #f2cd88;
+    }
+    .popup {
+      border: 2px dashed #ffdd33;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    .helpline {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      background: #111;
+      border: 2px solid red;
+      padding: 1rem;
+      color: #f77;
     }
   </style>
 </head>
 <body>
+  <div class="warning-banner">🔥 New Dump Just Dropped! Click to Rate or Regret 🔥</div>
+
   <div class="container">
     <h1>Rate My Dump</h1>
 
-    <div id="termsBox">
-      <input type="checkbox" id="terms" />
-      I agree to not upload pictures of my dinkie doos (joke's on you, no uploads!)
-    </div>
+    <p><input type="checkbox" id="terms" /> I agree to not upload pictures of my dinkie doos</p>
+    <button onclick="enterSite()">Let Me In</button>
 
     <div id="mainContent" style="display:none;">
-      <h3>💩 Random Dump of the Day 💩</h3>
-      <img id="poopImage" src="" alt="Poop" />
-      <p id="description"></p>
-      <p class="random-comment">“This one tore me up. Blood everywhere. In need of a poop knife.”</p>
-      <div class="rating">
-        <button onclick="rate('up')">👍 Rate Up</button>
-        <button onclick="rate('down')">👎 Rate Down</button>
+      <h2>🍩 Random Dump of the Day</h2>
+      <img src="https://i.imgur.com/z2Rbzft.jpg" alt="Daily Dump" />
+      <p><i>"My girlfriend had to pull this one out with salad tongs. It had joints."</i></p>
+
+      <div>
+        <button onclick="rate('up')">👍 Vote Up</button>
+        <button onclick="rate('down')">👎 Vote Down</button>
+        <p class="vote-output" id="voteMsg"></p>
       </div>
 
-      <ul class="leaderboard">
-        <strong>🏆 Top Dumps</strong>
-        <li>The Spiral Surprise – 328 votes</li>
-        <li>The Ghost Wipe – 290 votes</li>
-        <li>The Thunder Flush – 268 votes</li>
-      </ul>
+      <div class="leaderboard">
+        <h3>🧻 Top Rated Dumps:</h3>
+        <ul>
+          <li>"I let one go and it pierced my knickers"</li>
+          <li>"Tore me in half like wet drywall"</li>
+          <li>"The Three-Wiper That Cried"</li>
+          <li>"It steamed like a train. No survivors."</li>
+        </ul>
+      </div>
+
+      <div class="helpline">
+        🚨 Need Help? Call the 24/7 Poop Sling Hotline: <strong>1-800-POO-SAVE</strong><br/>
+        Rent-a-Rig. Emergency Bowl Support. Emotional Cleanups.
+      </div>
+
+      <div class="popup" id="spamPopup" style="display:none;">
+        💩 Wanna see your dookie in 3D? Click here to get started now!
+      </div>
     </div>
   </div>
 
   <script>
-    const images = [
-      'https://em-content.zobj.net/thumbs/160/apple/354/pile-of-poo_1f4a9.png',
-      'https://www.clipartmax.com/png/full/209-2092896_emoji-poop-poop-emoji-png.png',
-      'https://www.pngall.com/wp-content/uploads/5/Poop-Emoji-PNG-Clipart.png'
+    const voteUps = [
+      "Looked like a lava lamp exploded.",
+      "Split the toilet seat. We had to move.",
+      "A steaming spiral of shame and pride.",
+      "It growled at me. We made eye contact.",
+      "Used a whole roll. Still wasn't clean."
+    ];
+    const voteDowns = [
+      "Limp and lifeless. Like a deflated balloon.",
+      "Wet fart energy. Too soft to rate.",
+      "Looked like pudding. Felt like sin.",
+      "I threw the whole toilet out.",
+      "Couldn't flush. Had to baptize it instead."
     ];
 
-    const descriptions = [
-      '💩 The Spiral Surprise',
-      '🚽 The Splashdown Spectacular',
-      '🌪️ The Tornado Twister',
-      '🫥 The Ghost Wipe',
-      '🔥 The Spicy Mistake',
-      '💦 The Backdoor Tsunami'
-    ];
-
-    function getRandomItem(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
-    }
-
-    function loadDump() {
-      document.getElementById('poopImage').src = getRandomItem(images);
-      document.getElementById('description').innerText = getRandomItem(descriptions);
-    }
-
-    function rate(type) {
-      alert(type === 'up' ? 'Thanks for the upvote!' : 'Downvoted! That stinks.');
-      loadDump();
-    }
-
-    document.getElementById('terms').addEventListener('change', (e) => {
-      if (e.target.checked) {
-        document.getElementById('mainContent').style.display = 'block';
-        loadDump();
+    function enterSite() {
+      if (!document.getElementById('terms').checked) {
+        alert("Please agree not to upload dinkie doos.");
+        return;
       }
-    });
+      document.getElementById('mainContent').style.display = 'block';
+      setInterval(showPopup, 10000); // every 10 seconds
+    }
+
+    function rate(dir) {
+      const msg = dir === 'up'
+        ? voteUps[Math.floor(Math.random() * voteUps.length)]
+        : voteDowns[Math.floor(Math.random() * voteDowns.length)];
+      document.getElementById('voteMsg').innerText = msg;
+    }
+
+    function showPopup() {
+      const popup = document.getElementById('spamPopup');
+      popup.style.display = 'block';
+      setTimeout(() => { popup.style.display = 'none'; }, 6000);
+    }
   </script>
 </body>
 </html>
